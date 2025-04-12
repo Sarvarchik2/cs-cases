@@ -3,9 +3,8 @@
     <!-- Header -->
     <NuxtLink to="/" class="absolute top-4 left-4 text-white text-lg z-10">✕ Назад</NuxtLink>
 
-
     <!-- Icon -->
-    <div class="flex flex-col items-center mt-10 mb-6">
+    <div class="flex flex-col items-center mt-10 mb-6 ">
       <img src="@/assets/img/duck-steam.png" class="w-20 mb-4" />
       <h1 class="text-xl font-bold text-center mb-2">Куда отправлять предметы?</h1>
       <p class="text-sm text-gray-400 text-center px-2">
@@ -14,10 +13,12 @@
     </div>
 
     <!-- Input -->
-    <div class="bg-[#1D1A2F] rounded-lg px-4 py-3 mb-6">
-      <p class="text-sm break-all text-blue-400">
-        https://steamcommunity.com/tradeoffer/new/?partner=1234567890&token=ElAx9i1i
-      </p>
+    <div class="bg-[#1D1A2F] rounded-lg px-4 py-3 mb-6 steam-input">
+      <input
+          class="w-full bg-transparent text-sm text-blue-400 placeholder-gray-500 focus:outline-none"
+          placeholder="вставьте ссылку на ваш инвентарь"
+          type="text"
+      />
     </div>
 
     <!-- Button -->
@@ -31,4 +32,7 @@
 </script>
 
 <style scoped>
+.steam-input{
+  height: 120px;
+}
 </style>

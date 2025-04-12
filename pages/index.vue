@@ -1,12 +1,12 @@
 <template>
   <div class="min-h-screen bg-[#0D0B18] text-white flex flex-col items-center px-4 py-6 relative">
     <!-- Закрыть -->
-    <div class="absolute top-4 left-4 text-white text-lg">✕ Закрыть</div>
+    <button @click="closeWebApp" class="absolute top-4 left-4 text-white text-lg">✕ Закрыть</button>
 
     <!-- Логотип -->
     <div class="my-6">
       <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-gray-300 to-white flex items-center justify-center text-4xl font-bold shadow-lg">
-        <img class="w-16 h-16" src="~/assets/img/logo.png" alt=""></img>
+        <img class="w-16 h-16" src="~/assets/img/logo.png" alt="" />
       </div>
     </div>
 
@@ -54,6 +54,11 @@
 </template>
 
 <script setup>
+function closeWebApp() {
+  if (window?.Telegram?.WebApp?.close) {
+    window.Telegram.WebApp.close()
+  }
+}
 </script>
 
 <style scoped>

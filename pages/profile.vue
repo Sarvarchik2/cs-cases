@@ -42,21 +42,21 @@
     <!-- Withdrawn -->
     <h2 class="text-sm text-gray-300 mb-2">Выведено</h2>
     <div class="grid grid-cols-3 gap-3 mb-6">
-      <div class="bg-[#1D1A2F] rounded-lg p-2 text-center text-xs">
+      <NuxtLink to="/steam" class="bg-[#1D1A2F] rounded-lg p-2 text-center text-xs">
         <img src="~/assets/img/ak.png" class="mx-auto mb-1" />
         <p>AK-47</p>
         <p class="text-gray-400">Asimov</p>
-      </div>
-      <div class="bg-[#1D1A2F] rounded-lg p-2 text-center text-xs">
+      </NuxtLink>
+      <NuxtLink to="/steam" class="bg-[#1D1A2F] rounded-lg p-2 text-center text-xs">
         <img src="~/assets/img/ak.png" class="mx-auto mb-1" />
         <p>AK-47</p>
         <p class="text-gray-400">Asimov</p>
-      </div>
-      <div class="bg-[#1D1A2F] rounded-lg p-2 text-center text-xs">
+      </NuxtLink>
+      <NuxtLink to="/steam" class="bg-[#1D1A2F] rounded-lg p-2 text-center text-xs">
         <img src="~/assets/img/ak.png" class="mx-auto mb-1" />
         <p>AK-47</p>
         <p class="text-gray-400">Asimov</p>
-      </div>
+      </NuxtLink>
     </div>
 
     <!-- Sold -->
