@@ -1,12 +1,13 @@
 <template>
   <div class="min-h-screen bg-[#0D0B18] text-white flex flex-col items-center px-4 py-6 relative">
-    <!-- Закрыть -->
-    <button @click="closeWebApp" class="absolute top-4 left-4 text-white text-lg">✕ Закрыть</button>
-
     <!-- Логотип -->
     <div class="my-6">
-      <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-gray-300 to-white flex items-center justify-center text-4xl font-bold shadow-lg">
-        <img class="w-16 h-16" src="~/assets/img/logo.png" alt="" />
+      <div
+          class="w-24 h-24 rounded-full flex items-center justify-center text-4xl font-bold logo"
+          :class="{ 'tapped': isTapped }"
+          @click="handleTap"
+      >
+        <img src="~/assets/img/logo.png" alt="" />
       </div>
     </div>
 
@@ -18,8 +19,9 @@
 
     <!-- Баланс -->
     <div class="bg-[#1D1A2F] w-full rounded-lg p-4 text-center mb-4">
-      <div class="text-2xl font-semibold mb-1">💠 777</div>
+      <div class="text-2xl font-semibold mb-1">💠 {{ balance }}</div>
       <p class="text-sm text-gray-400">Твой баланс</p>
+      <p class="text-xs text-gray-500 mt-1">Осталось нажатий: {{ 100 - tapCount }}</p>
     </div>
 
     <!-- Кнопка -->
@@ -47,19 +49,67 @@
         </div>
       </div>
     </div>
-
-    <!-- Навигация -->
-
   </div>
 </template>
-
 <script setup>
-function closeWebApp() {
-  if (window?.Telegram?.WebApp?.close) {
-    window.Telegram.WebApp.close()
+import { ref, onMounted } from 'vue'
+
+const balance = ref(0)
+const tapCount = ref(0)
+const isTapped = ref(false)
+
+function handleTap() {
+  if (tapCount.value >= 100) return
+
+  tapCount.value++
+  balance.value++
+
+  isTapped.value = true
+  setTimeout(() => (isTapped.value = false), 150)
+
+  saveToLocalStorage()
+}
+
+function saveToLocalStorage() {
+  const data = {
+    balance: balance.value,
+    tapCount: tapCount.value,
+    timestamp: Date.now()
+  }
+  localStorage.setItem('tapStats', JSON.stringify(data))
+}
+
+function loadFromLocalStorage() {
+  const data = JSON.parse(localStorage.getItem('tapStats'))
+  if (!data) return
+
+  const now = Date.now()
+  const diff = now - data.timestamp
+  const oneDay = 24 * 60 * 60 * 1000
+
+  if (diff >= oneDay) {
+    tapCount.value = 0
+    balance.value = data.balance
+  } else {
+    balance.value = data.balance
+    tapCount.value = data.tapCount
   }
 }
-</script>
 
+onMounted(() => {
+  loadFromLocalStorage()
+})
+</script>
 <style scoped>
+.logo {
+  width: 250px;
+  height: 250px;
+  transition: transform 0.1s ease;
+}
+.logo.tapped {
+  transform: scale(0.85);
+}
+.logo img {
+  width: 100%;
+}
 </style>
